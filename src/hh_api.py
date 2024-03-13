@@ -6,12 +6,26 @@ from src.vacancy import Vacancy
 
 class HeadHunterAPI(AbstractAPI):
     def __init__(self, api_key):
+        """
+        Конструктор для подключения к hh.ru
+        :param api_key: api ссылка для подключения
+        """
         self.api_key = api_key
 
     def connect(self):
+        """
+        Метод вывода подключения
+        :return: нет
+        """
         print('Подключение к HH.ru API...')
 
     def get_vacancies(self, keyword, per_page=99):
+        """
+        Метод для получения вакансий с ссылки api
+        :param keyword: ключевое слово для поиска
+        :param per_page: количество выводимых вакансий
+        :return: список вакансий - vacancies
+        """
         params = {
             'per_page': per_page,
             'text': keyword,
