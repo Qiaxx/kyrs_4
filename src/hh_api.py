@@ -11,8 +11,13 @@ class HeadHunterAPI(AbstractAPI):
     def connect(self):
         print('Подключение к HH.ru API...')
 
-    def get_vacancies(self, keyword):
-        response = requests.get(self.api_key).json()
+    def get_vacancies(self, keyword, per_page=99):
+        params = {
+            'per_page': per_page,
+            'text': keyword,
+            'search_field': ('name', 'description')
+        }
+        response = requests.get(self.api_key, params=params).json()
         vacancies = []
         for item in response.get('items', []):
             if keyword.lower() in item.get('name', '').lower():
