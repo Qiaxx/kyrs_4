@@ -1,6 +1,14 @@
 class Vacancy:
 
     def __init__(self, name, url, salary: int, description, requirement):
+        """
+        Конструктор вакансии
+        :param name: название вакансии
+        :param url: ссылка на вакансию
+        :param salary: зарплата в вакансии (поступает словарь с начальной и максимально возможной зарплатой)
+        :param description: описание вакансии
+        :param requirement: требования
+        """
         self.name = name
         self.url = url
         if salary is not None:
