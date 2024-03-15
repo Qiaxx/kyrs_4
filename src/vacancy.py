@@ -1,6 +1,6 @@
 class Vacancy:
 
-    def __init__(self, name, url, salary: int, description, requirement):
+    def __init__(self, name: str, url: str, salary: int, description: str, requirement: str):
         """
         Конструктор вакансии
         :param name: название вакансии
@@ -15,7 +15,7 @@ class Vacancy:
             self.salary = salary
         else:
             self.salary = 0
-        self.description = description
+        self.description = description if description is not None else ""
         self.requirement = requirement
 
     def __lt__(self, other):
@@ -28,7 +28,16 @@ class Vacancy:
         return self.salary == other.salary
 
     def __repr__(self):
-        return f"Vacancy(name='{self.name}', url='{self.url}', salary={self.salary}, description='{self.description}', requirement='{self.requirement}')"
+        return (f"Vacancy(name='{self.name}', url='{self.url}', salary={self.salary}, "
+                f" description='{self.description}', requirement='{self.requirement}')")
 
     def __str__(self):
-        return f"Название: {self.name}\nURL: {self.url}\nЗарплата: {self.salary}\nОписание: {self.description}\nТребования: {self.requirement}"
+        return (f"Название: {self.name}\nURL: {self.url}\nЗарплата: {self.salary}\n"
+                f"Описание: {self.description}\nТребования: {self.requirement}")
+
+    def __iter__(self):
+        # Приводим описание к нижнему регистру, если оно не является None
+        if self.description is not None:
+            return iter(self.description.lower())
+        else:
+            return iter("")

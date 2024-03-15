@@ -5,12 +5,12 @@ from src.vacancy import Vacancy
 
 
 class HeadHunterAPI(AbstractAPI):
-    def __init__(self, api_key):
+    def __init__(self, api_url: str):
         """
         Конструктор для подключения к hh.ru
-        :param api_key: api ссылка для подключения
+        :param api_url: api ссылка для подключения
         """
-        self.api_key = api_key
+        self.api_url = api_url
 
     def connect(self):
         """
@@ -19,7 +19,7 @@ class HeadHunterAPI(AbstractAPI):
         """
         print('Подключение к HH.ru API...')
 
-    def get_vacancies(self, keyword, per_page=99):
+    def get_vacancies(self, keyword: str, per_page=99):
         """
         Метод для получения вакансий с ссылки api
         :param keyword: ключевое слово для поиска
@@ -31,7 +31,7 @@ class HeadHunterAPI(AbstractAPI):
             'text': keyword,
             'search_field': ('name', 'description')
         }
-        response = requests.get(self.api_key, params=params).json()
+        response = requests.get(self.api_url, params).json()
         vacancies = []
         for item in response.get('items', []):
             if keyword.lower() in item.get('name', '').lower():
@@ -57,3 +57,8 @@ class HeadHunterAPI(AbstractAPI):
                 }
                 vacancies.append(Vacancy(**vacancy_data))
         return vacancies
+
+# a = HeadHunterAPI('https://api.hh.ru/vacancies')
+# b = [i for i in a.get_vacancies('Python')]
+# for i, vacancy in enumerate(b, start=1):
+#     print(f'{i}. {vacancy}')
