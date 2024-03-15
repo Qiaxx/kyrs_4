@@ -34,10 +34,3 @@ class Vacancy:
     def __str__(self):
         return (f"Название: {self.name}\nURL: {self.url}\nЗарплата: {self.salary}\n"
                 f"Описание: {self.description}\nТребования: {self.requirement}")
-
-    def __iter__(self):
-        # Приводим описание к нижнему регистру, если оно не является None
-        if self.description is not None:
-            return iter(self.description.lower())
-        else:
-            return iter("")

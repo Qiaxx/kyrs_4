@@ -31,7 +31,7 @@ class HeadHunterAPI(AbstractAPI):
             'text': keyword,
             'search_field': ('name', 'description')
         }
-        response = requests.get(self.api_url, params).json()
+        response = requests.get(self.api_url, params=params).json()
         vacancies = []
         for item in response.get('items', []):
             if keyword.lower() in item.get('name', '').lower():
@@ -57,8 +57,3 @@ class HeadHunterAPI(AbstractAPI):
                 }
                 vacancies.append(Vacancy(**vacancy_data))
         return vacancies
-
-# a = HeadHunterAPI('https://api.hh.ru/vacancies')
-# b = [i for i in a.get_vacancies('Python')]
-# for i, vacancy in enumerate(b, start=1):
-#     print(f'{i}. {vacancy}')
