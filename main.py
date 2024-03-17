@@ -30,6 +30,16 @@ def interact_with_user():
     for i, vacancy in enumerate(keyword_vacancies, start=1):
         print(f"{i}. {vacancy}")
 
+    # сохранение в файл в формате json
+    user_questions = input('Желаете сохранить найденные вакансии? (y|n): ')
+    if user_questions.lower() == 'y':
+        for vacancy in top_n_vacancies:
+            storage.add_vacancy(vacancy)
+        for vacancy in keyword_vacancies:
+            storage.add_vacancy(vacancy)
+    else:
+        print('Поиск завершен')
+
 
 if __name__ == "__main__":
     interact_with_user()
